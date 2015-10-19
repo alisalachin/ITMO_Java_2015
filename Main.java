@@ -29,6 +29,10 @@ public class Main {
             try {
                 Scanner sc;
                 Integer price;
+                if (fList==null) {
+                    System.out.println("Empty");
+                    return;
+                }
                 for (int i = 0; i < fList.length; i++) {
                     ToysInFile = new HashSet<String>();
                     sc = new Scanner(fList[i]);
@@ -43,14 +47,15 @@ public class Main {
                             } catch (NumberFormatException e) {
                                 continue;
                             }
-                            if (!ToysInFile.contains(line.get(0))) {
-                                ToysInFile.add(line.get(0));
-                                if (ToysPrice.containsKey(line.get(0))) {
-                                    ToysCount.put(line.get(0), ToysCount.get(line.get(0)) + 1);
-                                    ToysPrice.put(line.get(0), ToysPrice.get(line.get(0)) + price.doubleValue());
+                            String toyName=line.get(0);
+                            if (!ToysInFile.contains(toyName)) {
+                                ToysInFile.add(toyName);
+                                if (ToysPrice.containsKey(toyName)) {
+                                    ToysCount.put(toyName, ToysCount.get(toyName) + 1);
+                                    ToysPrice.put(toyName, ToysPrice.get(toyName) + price.doubleValue());
                                 } else {
-                                    ToysCount.put(line.get(0), 1);
-                                    ToysPrice.put(line.get(0), price.doubleValue());
+                                    ToysCount.put(toyName, 1);
+                                    ToysPrice.put(toyName, price.doubleValue());
                                 }
                             }
                         }
